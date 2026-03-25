@@ -1,0 +1,11 @@
+
+SET LINESIZE  2000 COLSEP,
+SET SERVEROUTPUT ON
+SET ECHO ON
+
+
+SELECT SQL_ID,SID,SERIAL#,STATUS, 'alter system kill session '''|| SID||','||SERIAL#||''' IMMEDIATE;' "キルコマンド"
+ FROM V$SESSION WHERE SQL_ID='&1';
+
+
+

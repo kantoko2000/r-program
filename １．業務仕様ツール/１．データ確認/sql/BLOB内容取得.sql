@@ -1,0 +1,27 @@
+SET head OFF
+set pages 10000
+SET SERVEROUTPUT OFF
+SET LINESIZE  2000 COLSEP,
+
+SET head OFF
+SET VERIFY OFF
+set feed off
+SET ECHO OFF
+
+select 
+--base_unique_id ||',' ||
+--UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,1))
+--convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,1)),'JA16SJIS','UTF8'),
+--convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,2000)),'JA16SJIS','UTF8')
+REPLACE(convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,10)),'JA16SJIS','UTF8'), '><', '>'||CHR(13)||'<'),
+REPLACE(convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,2000)),'JA16SJIS','UTF8'), '><','>'||CHR(13)||'<'),
+REPLACE(convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,4000)),'JA16SJIS','UTF8'), '><','>'||CHR(13)||'<'),
+REPLACE(convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,6000)),'JA16SJIS','UTF8'), '><','>'||CHR(13)||'<'),
+REPLACE(convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,8000)),'JA16SJIS','UTF8'), '><','>'||CHR(13)||'<'),
+REPLACE(convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,10000)),'JA16SJIS','UTF8'), '><','>'||CHR(13)||'<')
+--substrb( UTL_I18N.RAW_TO_CHAR(DBMS_LOB.SUBSTR(a.BASE_MESSAGE_RAW_DATA,1000,1),'AL32UTF8'), INSTRB(UTL_I18N.RAW_TO_CHAR(DBMS_LOB.SUBSTR(a.BASE_MESSAGE_RAW_DATA,1000,1),'AL32UTF8'),'<sameDeliveryReqNum')+20,INSTRB(UTL_I18N.RAW_TO_CHAR(DBMS_LOB.SUBSTR(a.BASE_MESSAGE_RAW_DATA,1000,1),'AL32UTF8'),'</sameDeliveryReqNum>')-INSTRB(UTL_I18N.RAW_TO_CHAR(DBMS_LOB.SUBSTR(a.BASE_MESSAGE_RAW_DATA,1000,1),'AL32UTF8'),'<sameDeliveryReqNum')-20) AS "”z‘—ˆË—ŠŠÇ—”Ô†"
+--UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,29))
+from TJFTX001_MESSAGE_HISTORY
+ A WHERE base_unique_id in ('&1') AND BASE_JMS_MESSAGE_TYPE='I';
+
+ exit;

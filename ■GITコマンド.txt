@@ -1,0 +1,96 @@
+--■４．（パソコンＡにて）ソース修正、リポジトリを最新化する
+cd C:\ローカルツール\python
+
+# 1. 修正したファイルを「送り出しリスト」に登録する
+git add .
+
+# 2. 「何を変えたか」のメモと一緒に保存する
+git commit -m "パイソンのロジック修正"
+
+# 3. GitHubへ送信！
+git push origin master
+
+--■３．（パソコンＢにて）最新化する
+git pull origin master
+--■２．（パソコンＢにて）ソースファイルを取り込む
+# パソコンBの好きな場所で
+git clone https://github.com/kantoko2000/r-python.git
+# フォルダ名を指定する（おすすめ）
+git clone https://github.com/kantoko2000/r-python.git python
+
+
+--■１．（パソコンＡにて）すべてキャンセルして、登録しなおす
+# 1. 今までのGit設定を一旦すべて削除します（フォルダの中身は消えません！）
+rd /s /q .git
+
+# 2. 最初からやり直し。Gitを初期化します
+git init
+
+# 3. GitHubのリポジトリURLを登録し直します
+git remote add origin https://github.com/kantoko2000/r-python.git
+
+# 4. 「.gitignore」を読み込み、不要なファイルを除いて登録します
+git add .
+
+# 5. きれいな状態で最初のコミットをします
+git commit -m "初回コミット（重いファイル除外済み）"
+
+# 6. 強制的にGitHubへ送りつけます！
+git push -u origin master -f
+
+
+
+--■
+----▼登録確認
+git config --global user.name "kosaku.saito@jp.ricoh.com"
+git config --global user.email "kosaku.saito@jp.ricoh.com"
+----▼
+git config --list
+----▼# 共有したいディレクトリに移動
+cd C:\ローカルツール\python
+
+----▼Gitの初期化
+git init
+
+----▼全ファイルを管理対象に追加
+git add .
+
+----▼最初の保存（コミット）
+git commit -m "first commit"
+
+----▼GitHubと紐付け（URLは作成したリポジトリのもの）
+git remote add origin https://github.com/ユーザー名/リポジトリ名.git
+
+----▼クラウドへ送信
+git push -u origin main
+
+----▼
+# 新しいメールアドレスを設定（--globalでPC全体に適用）
+git config --global user.email "kantoko2000@gmail.com"
+
+# 名前もついでに変えたい場合はこちら
+git config --global user.name "kantoko2000@gmail.com"
+
+----▼
+git config user.email
+
+sai444555
+----▼1. 接続先が登録されているか最終確認
+git remote -v
+----▼2. GitHubへデータを送信（Push）する
+git push -u origin master
+
+----▼★クリアして再登録
+# 1. 今までの「重いファイルを含んだ登録」を一旦白紙に戻す
+git rm -r --cached .
+
+# 2. .gitignoreの設定を反映して、改めて登録し直す
+git add .
+git commit -m "Ｒ－パイソン"
+
+# 3. いざ、GitHubへ送信！
+git push -u origin master
+----▼
+----▼
+----▼
+----▼

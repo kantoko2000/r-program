@@ -1,0 +1,50 @@
+set echo on
+SET head OFF
+set pages 10000
+SET SERVEROUTPUT OFF
+SET LINESIZE  2000 COLSEP,
+
+SET head OFF
+SET VERIFY OFF
+set feed off
+SET ECHO OFF
+
+select DISTINCT
+B.inquiry_num ||','||
+     B.CR_NUM ||','||
+A.SVC_ARR_MODIFY_CTGR ||','||
+(SELECT EMP_EMAIL FROM  TJFXX049_EMP_BASIC_M  WHERE EMP_CD=A.LAST_UPDATED_BY_ID)  ||','||
+B.SALES_TO_CANCEL_DATETIME   "問合せ番号,受注番号,役務依頼ステータス,画面更新者のメールアドレス,売上先取消日時"
+from TJFAX373_SVC_ARR_SERVICE_HIST a,TJFAX151_CUSTOMER_REQUEST b,TJFAX371_SVC_ARR c
+where 1=1
+ and a.SVC_ARR_MODIFY_CTGR ='15'
+ and c.cr_num=b.cr_num
+ and c.SVC_ARR_NUM=a.SVC_ARR_NUM
+ and B.inquiry_num like 'JS%' AND B.DVLRY_MGMT_NUM in (
+ Select
+substrb( UTL_I18N.RAW_TO_CHAR(DBMS_LOB.SUBSTR(A.BASE_MESSAGE_RAW_DATA,2000,1),'AL32UTF8'), INSTRB(UTL_I18N.RAW_TO_CHAR(DBMS_LOB.SUBSTR(A.BASE_MESSAGE_RAW_DATA,2000,1),'AL32UTF8'),'>DELIVERY_MGMT_NUM')+57,8 ) as DELIVERY_MGMT_NUM
+from TJFTX001_MESSAGE_HISTORY A
+where 1=1
+ --サンプル　38513727
+and BASE_UNIQUE_ID in (
+'&1'
+)
+)
+;
+
+select 
+REPLACE(convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,10)),'JA16SJIS','UTF8'), '><', '>'||CHR(13)||'<'),
+REPLACE(convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,2000)),'JA16SJIS','UTF8'), '><','>'||CHR(13)||'<'),
+REPLACE(convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,4000)),'JA16SJIS','UTF8'), '><','>'||CHR(13)||'<'),
+REPLACE(convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,6000)),'JA16SJIS','UTF8'), '><','>'||CHR(13)||'<'),
+REPLACE(convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,8000)),'JA16SJIS','UTF8'), '><','>'||CHR(13)||'<'),
+REPLACE(convert(UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR( A.base_message_raw_data ,2000,10000)),'JA16SJIS','UTF8'), '><','>'||CHR(13)||'<')
+from TJFTX001_MESSAGE_HISTORY
+ A WHERE base_unique_id in ('&1') AND BASE_JMS_MESSAGE_TYPE='I';
+
+ exit;
+
+
+
+
+exit;

@@ -1,0 +1,3 @@
+rollback;
+spool off;
+exit;

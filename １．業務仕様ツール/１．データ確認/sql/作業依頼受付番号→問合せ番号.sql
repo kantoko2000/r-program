@@ -1,0 +1,16 @@
+@%OneDrive%\ツール\１．コマンド実行\Ｚ．共通\共通設定.sql
+
+
+select distinct TJFAX371.SVC_ARR_SERV_REQ_RECEIPT_NUM,TJFAX371.INQUIRY_NUM,TJFAX371.INQUIRY_L_NUM,
+CASE (select count(*) from TJFAX15A_CR_ITEM where TJFAX371.INQUIRY_NUM=INQUIRY_NUM and l_flg='1' and cancel_flg='0')
+    WHEN 0  THEN '受注は削除されている'
+    ELSE '受注は削除されていない'
+  END 
+from   TJFAX371_SVC_ARR TJFAX371,  --役務手配
+       TJFAX373_SVC_ARR_SERVICE_HIST TJFAX373  --役務手配作業履歴
+where  1=1
+and    TJFAX371.SVC_ARR_NUM=TJFAX373.SVC_ARR_NUM
+and    TJFAX371.SVC_ARR_HIST_NUM=TJFAX373.SVC_ARR_HIST_NUM
+and    TJFAX373.SVC_ARR_SERV_REQ_RECEIPT_NUM='&1'
+;
+exit;

@@ -1,0 +1,32 @@
+SELECT
+CASE A.DELI_SERV_CTGR
+    WHEN '11' THEN 'サプライ'
+    WHEN '12' THEN 'ルート'
+    WHEN '13' THEN 'マシン'
+    WHEN '14' THEN '混載'
+    WHEN '15' THEN 'ベンダー'
+    WHEN '16' THEN '納期短縮'
+    WHEN '17' THEN '振替配送'
+    WHEN '91' THEN '配送不要'
+    ELSE '該当なし'
+  END 配送サービス区分,
+  a.DIST_BASE_CD 物流拠点コード,
+  b.DIST_BASE_NAME 物流拠点名,
+  a.COLL_SERV_CD 搬入出付帯作業コード,
+  c.COLL_SERV_NAME 搬入出付帯作業名,
+  a.AREA_CD エリアコード,
+  a.COLL_SERV_EXECUTABLE_FLG 搬入出付帯作業実施可否フラグ,
+  a.M_INVALID_FLG  マスタ無効フラグ
+--  a.CREATED_BY_ID,
+--  a.CREATE_DATETIME,
+--  a.LAST_UPDATED_BY_ID,
+--  a.LAST_UPDATE_DATETIME
+FROM
+  TJFAX622_COLL_SERV_EXEC_ENBL_M a,
+  TJFAX641_DIST_BASE_M b,
+  TJFAX621_COLL_SERV_M c
+WHERE
+  a.DIST_BASE_CD = b.DIST_BASE_CD AND 
+  a.COLL_SERV_CD = c.COLL_SERV_CD 
+--  AND  a.DELI_SERV_CTGR =''
+ORDER BY a.DELI_SERV_CTGR,a.DIST_BASE_CD

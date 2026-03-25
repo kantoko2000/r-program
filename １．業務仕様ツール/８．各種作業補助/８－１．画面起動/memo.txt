@@ -1,0 +1,35 @@
+--■
+https://opac.lib.city.yokohama.lg.jp/winj/opac/top.do?lang=ja
+9031182660	sai-444555
+9027524041	sai-444555
+
+
+playwright codegen https://opac.lib.city.yokohama.lg.jp/winj/opac/top.do?lang=ja
+
+
+playwright codegen https://mylearn.oracle.com/ou/course/oracle-cloud-infrastructure-architect-associate-2025-jp/152615/
+playwright codegen https://www.vo3is.ricoh.co.jp/portal/index.jsp
+
+
+ありがとう、これ、起動するｕｒｌを入力によって、切り替えたいんだよね
+「どの画面を起動しますか？」っていうメニューがでて
+１：講習
+２：図書館
+って選んで、
+１だったら、https://mylearn.oracle.com/ou/course/oracle-cloud-infrastructure-architect-associate-2025-jp/152615/　起動
+２だったら、https://opac.lib.city.yokohama.lg.jp/winj/opac/top.do?lang=ja　起動
+っていう風にできる？
+
+
+--■必要なもの
+----▼１．問合せ番号を元に検索をする・・・受注共通
+----▼２．ＳＴ環境に接続をする
+----▼３．リコーログイン
+----▼４．ＲＪログイン
+
+
+
+
+
+--■今の画面起動
+https://www.vo3is.ricoh.co.jp/portal/index.jsp
