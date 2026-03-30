@@ -2,9 +2,10 @@
 import os
 import sys
 
-# カレントパス取得、共通モジュールのパスを絶対パスで固定
+# 実行ファイルがあるディレクトリの絶対パスを取得→相対パスで共通フォルダを設定
+# '../..' で 2 つ上のディレクトリへ移動
 current_dir = os.path.dirname(os.path.abspath(__file__)) 
-common_folder_path = r'C:\ローカルツール\python\共通'
+common_folder_path = os.path.join(current_dir, '..', '..', '..', '共通')
 
 # sys.pathに共通フォルダを追加し、共通モジュールをインポートする
 sys.path.append(common_folder_path)

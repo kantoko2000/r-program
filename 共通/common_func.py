@@ -190,7 +190,7 @@ def common_kosin_sql_exe(connection_target, current_dir, sql_file_path, input_co
     bat_arg15=input_content[9]
 
     # 実行するバッチファイルと引数
-    bat_file = current_dir + "\リカバリデータ更新___注意.bat"
+    bat_file = current_dir + "\２－１．リカバリ作業【注意】.bat"
     arguments = [bat_arg1, bat_arg2, bat_arg3,bat_arg4,bat_arg5,bat_arg6,bat_arg7,bat_arg8,bat_arg9,bat_arg10,bat_arg11,bat_arg12,bat_arg13,bat_arg14,bat_arg15]  # 引数のリスト
 
     command = f'start "" "{bat_file}" ' + ' '.join(arguments)

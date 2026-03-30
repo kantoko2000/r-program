@@ -2,9 +2,10 @@
 import os
 import sys
 # 実行ファイルがあるディレクトリの絶対パスを取得→相対パスで共通フォルダを設定
-current_dir = os.path.dirname(os.path.abspath(__file__)) 
 # '../..' で 2 つ上のディレクトリへ移動
+current_dir = os.path.dirname(os.path.abspath(__file__)) 
 common_folder_path = os.path.join(current_dir, '..', '..', '共通')
+
 # sys.pathに共通フォルダを追加し、共通モジュールをインポートする
 sys.path.append(common_folder_path)
 from common_func import *
